@@ -1,19 +1,22 @@
 import * as SplashScreen from "expo-splash-screen";
 import React, { useState, useEffect, useCallback } from "react";
 import { View, Text } from "react-native";
+import { Asset } from "expo-asset";
+
+import { Ionicons } from "@expo/vector-icons";
+import * as Font from "expo-font";
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
 
   useEffect(() => {
-    // 데이터를 가져오는 구간
+    // 스플래쉬 스크린 중 데이터를 가져오는 구간
     async function prepare() {
       try {
         await SplashScreen.preventAutoHideAsync();
         // fetch data...
-
-        // 테스트를 위한 타이머 설정
-        await new Promise((resolve) => setTimeout(resolve, 3000));
+        await Font.loadAsync(Ionicons.font);
+        await Asset.loadAsync(require("./image01.jpeg"));
       } catch (e) {
         console.error(e);
       } finally {
@@ -24,6 +27,7 @@ export default function App() {
   }, []);
 
   const onLayoutRootView = useCallback(async () => {
+    // 재렌더링이 되더라도 appIsReady(현재 true)값이 바뀌지 않는 이상, hideAsync() 함수를 계속 재사용 가능하다.
     if (appIsReady) {
       await SplashScreen.hideAsync();
     }
