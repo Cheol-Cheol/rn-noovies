@@ -2,9 +2,10 @@ import * as SplashScreen from "expo-splash-screen";
 import React, { useState, useEffect, useCallback } from "react";
 import { View, Text } from "react-native";
 import { useAssets } from "expo-asset";
-
 import { Ionicons } from "@expo/vector-icons";
 import * as Font from "expo-font";
+import { NavigationContainer } from "@react-navigation/native";
+import Tabs from "./navigation/Tabs";
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -40,8 +41,8 @@ export default function App() {
   }
 
   return (
-    <View onLayout={onLayoutRootView}>
-      <Text>We are done loading!</Text>
-    </View>
+    <NavigationContainer onLayout={onLayoutRootView}>
+      <Tabs />
+    </NavigationContainer>
   );
 }
