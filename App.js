@@ -12,22 +12,22 @@ export default function App() {
   const [assets] = useAssets([require("./image01.jpeg")]);
   const [loaded] = Font.useFonts(Ionicons.font);
 
-  useEffect(() => {
-    // 스플래쉬 스크린 중 데이터를 가져오는 구간
-    async function prepare() {
-      try {
-        if (!assets || !loaded) {
-          await SplashScreen.preventAutoHideAsync();
-        }
-        // fetch data...
-      } catch (e) {
-        console.error(e);
-      } finally {
-        setAppIsReady(true);
-      }
-    }
-    prepare();
-  }, []);
+  // useEffect(() => {
+  //   // 스플래쉬 스크린 중 데이터를 가져오는 구간
+  //   async function prepare() {
+  //     try {
+  //       if (!assets || !loaded) {
+  //         await SplashScreen.preventAutoHideAsync();
+  //       }
+  //       // fetch data...
+  //     } catch (e) {
+  //       console.error(e);
+  //     } finally {
+  //       setAppIsReady(true);
+  //     }
+  //   }
+  //   prepare();
+  // }, []);
 
   const onLayoutRootView = useCallback(async () => {
     // 재렌더링이 되더라도 appIsReady(현재 true)값이 바뀌지 않는 이상, hideAsync() 함수를 계속 재사용 가능하다.
@@ -36,12 +36,12 @@ export default function App() {
     }
   }, [appIsReady]);
 
-  if (!appIsReady) {
-    return null;
-  }
+  // if (!appIsReady) {
+  //   return null;
+  // }
 
   return (
-    <NavigationContainer onLayout={onLayoutRootView}>
+    <NavigationContainer>
       <Tabs />
     </NavigationContainer>
   );
