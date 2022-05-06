@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "rn-noovies",
+    "slug": "rn-noovies",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "rn-noovies"
+}
