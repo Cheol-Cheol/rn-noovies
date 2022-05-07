@@ -15,9 +15,9 @@ const ScreenTwo = ({ navigation: { navigate } }) => (
   </TouchableOpacity>
 );
 
-const ScreenThree = ({ navigation: { setOptions } }) => (
-  <TouchableOpacity onPress={() => setOptions({ title: "Hello!" })}>
-    <Text>Change Title</Text>
+const ScreenThree = ({ navigation: { navigate } }) => (
+  <TouchableOpacity onPress={() => navigate("Tabs", { screen: "Search" })}>
+    <Text>Go to Search</Text>
   </TouchableOpacity>
 );
 
