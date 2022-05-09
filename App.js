@@ -1,17 +1,19 @@
 import * as SplashScreen from "expo-splash-screen";
-import React, { useState, useEffect, useCallback } from "react";
-import { View, Text } from "react-native";
+import React, { useState, useCallback } from "react";
+import { useColorScheme } from "react-native";
 import { useAssets } from "expo-asset";
 import { Ionicons } from "@expo/vector-icons";
 import * as Font from "expo-font";
 import { NavigationContainer } from "@react-navigation/native";
 import Root from "./navigation/Root";
+import { ThemeProvider } from "styled-components/native";
+import { darkTheme, lightTheme } from "./styled";
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
   const [assets] = useAssets([require("./image01.jpeg")]);
   const [loaded] = Font.useFonts(Ionicons.font);
-
+  const isDark = useColorScheme() === "dark";
   // useEffect(() => {
   //   // 스플래쉬 스크린 중 데이터를 가져오는 구간
   //   async function prepare() {
@@ -41,8 +43,10 @@ export default function App() {
   // }
 
   return (
-    <NavigationContainer>
-      <Root />
-    </NavigationContainer>
+    <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+      <NavigationContainer>
+        <Root />
+      </NavigationContainer>
+    </ThemeProvider>
   );
 }

@@ -1,21 +1,26 @@
 import React from "react";
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { Dimensions } from "react-native";
 import styled from "styled-components/native";
+import Swiper from "react-native-web-swiper";
 
-const Btn = styled.TouchableOpacity`
+const Container = styled.ScrollView`
+  background-color: ${(props) => props.theme.mainBgColor};
+`;
+const View = styled.View`
   flex: 1;
-  justify-content: center;
-  align-items: center;
 `;
 
-const Title = styled.Text`
-  color: blue;
-`;
+const { height: SCREEN_HEIGHT } = Dimensions.get("window");
 
-const Movies = ({ navigation: { navigate } }) => (
-  <Btn onPress={() => navigate("Stack", { screen: "Three" })}>
-    <Title>Movie</Title>
-  </Btn>
+const Movies = () => (
+  <Container>
+    <Swiper containerStyle={{ width: "100%", height: SCREEN_HEIGHT / 5 }}>
+      <View style={{ backgroundColor: "red" }}></View>
+      <View style={{ backgroundColor: "blue" }}></View>
+      <View style={{ backgroundColor: "red" }}></View>
+      <View style={{ backgroundColor: "blue" }}></View>
+    </Swiper>
+  </Container>
 );
 
 export default Movies;
