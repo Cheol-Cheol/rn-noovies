@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components/native";
 import { View } from "react-native";
 import { makeImgPath } from "../utils";
+import Poster from "./Poster";
 
 const BgImg = styled.Image`
   width: 100%;
@@ -11,11 +12,6 @@ const BgImg = styled.Image`
 const Title = styled.Text`
   font-weight: 600;
   color: white;
-`;
-const Poster = styled.Image`
-  width: 100px;
-  height: 155px;
-  border-radius: 5px;
 `;
 const Wrapper = styled.View`
   flex-direction: row;
@@ -46,7 +42,7 @@ const Slide = ({
     <View style={{ flex: 1 }}>
       <BgImg source={{ url: makeImgPath(backdrop_path) }} />
       <Wrapper>
-        <Poster source={{ url: makeImgPath(poster_path) }}></Poster>
+        <Poster path={poster_path} />
         <Column>
           <Title>{original_title}</Title>
           {vote_average > 0 ? <Votes>⭐️{vote_average}/10</Votes> : null}
