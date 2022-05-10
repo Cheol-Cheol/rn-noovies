@@ -8,8 +8,6 @@ const Image = styled.Image`
   border-radius: 5px;
 `;
 
-const Poster = ({ path }) => (
-  <Image source={{ url: makeImgPath(path) }}></Image>
-);
+const Poster = ({ path }) => <Image source={{ url: makeImgPath(path) }} />;
 
 export default Poster;
