@@ -1,6 +1,6 @@
 import React from "react";
+import { Text, TouchableOpacity } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { View, Text, TouchableOpacity } from "react-native";
 import { YELLOW_COLOR } from "../colors";
 
 const ScreenOne = ({ navigation: { navigate } }) => (

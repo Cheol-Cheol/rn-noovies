@@ -1,16 +1,17 @@
 import React from "react";
+// RN
+import { useColorScheme } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Ionicons } from "@expo/vector-icons";
+
 import Movies from "../screens/Movies";
 import Tv from "../screens/Tv";
 import Search from "../screens/Search";
-import { useColorScheme } from "react-native";
 import { BLACK_COLOR, YELLOW_COLOR } from "../colors";
-import { Ionicons } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
 
 const Tabs = () => {
-  // dark인지 light인지 반환해준다.
   const isDark = useColorScheme() === "dark";
   return (
     <Tab.Navigator

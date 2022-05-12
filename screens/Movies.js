@@ -40,12 +40,16 @@ const Votes = styled.Text`
   color: rgba(255, 255, 255, 0.8);
   font-size: 10px;
 `;
+const ListContainer = styled.View`
+  margin-bottom: 40px;
+`;
 
 const Movies = () => {
   const [loading, setLoading] = useState(true);
   const [nowPlaying, setNowPlaying] = useState([]);
   const [upcoming, setUpcoming] = useState([]);
   const [trending, setTrending] = useState([]);
+
   const getTrending = async () => {
     const { results } = await (
       await fetch(
@@ -62,7 +66,6 @@ const Movies = () => {
     ).json();
     setUpcoming(results);
   };
-
   const getNowPlaying = async () => {
     const { results } = await (
       await fetch(
@@ -71,7 +74,6 @@ const Movies = () => {
     ).json();
     setNowPlaying(results);
   };
-
   const getData = async () => {
     try {
       // wait for all of them
@@ -114,23 +116,30 @@ const Movies = () => {
           />
         ))}
       </Swiper>
-      <ListTitle>Trending Movies</ListTitle>
-      <TrendingScroll
-        contentContainerStyle={{ paddingLeft: 30 }}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-      >
-        {trending.map((movie) => (
-          <Movie key={movie.id}>
-            <Poster path={movie.poster_path} />
-            <Title>
-              {movie.original_title.slice(0, 13)}
-              {movie.original_title.length > 13 ? "..." : null}
-            </Title>
-            <Votes>⭐️ {movie.vote_average}/10</Votes>
-          </Movie>
-        ))}
-      </TrendingScroll>
+      <ListContainer>
+        <ListTitle>Trending Movies</ListTitle>
+        <TrendingScroll
+          contentContainerStyle={{ paddingLeft: 30 }}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+        >
+          {trending.map((movie) => (
+            <Movie key={movie.id}>
+              <Poster path={movie.poster_path} />
+              <Title>
+                {movie.original_title.slice(0, 13)}
+                {movie.original_title.length > 13 ? "..." : null}
+              </Title>
+              <Votes>
+                {movie.vote_average > 0
+                  ? `⭐️ ${movie.vote_average}/10`
+                  : `Coming soon`}
+              </Votes>
+            </Movie>
+          ))}
+        </TrendingScroll>
+      </ListContainer>
+      <ListTitle>Coming soon</ListTitle>
     </Container>
   );
 };

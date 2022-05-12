@@ -1,12 +1,15 @@
-import * as SplashScreen from "expo-splash-screen";
 import React, { useState, useCallback } from "react";
+// RN
 import { useColorScheme } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { ThemeProvider } from "styled-components/native";
+// Expo
+import * as SplashScreen from "expo-splash-screen";
 import { useAssets } from "expo-asset";
 import { Ionicons } from "@expo/vector-icons";
 import * as Font from "expo-font";
-import { NavigationContainer } from "@react-navigation/native";
+
 import Root from "./navigation/Root";
-import { ThemeProvider } from "styled-components/native";
 import { darkTheme, lightTheme } from "./styled";
 
 export default function App() {
