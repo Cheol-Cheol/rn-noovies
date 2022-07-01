@@ -26,7 +26,6 @@ const NativeStack = createNativeStackNavigator();
 const Stack = () => (
   <NativeStack.Navigator
     screenOptions={{
-      animation: "fade",
       headerTintColor: YELLOW_COLOR,
       headerBackTitleVisible: false,
     }}
