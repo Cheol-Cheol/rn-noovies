@@ -7,7 +7,6 @@ import { Ionicons } from "@expo/vector-icons";
 import Movies from "../screens/Movies";
 import Tv from "../screens/Tv";
 import Search from "../screens/Search";
-import { BLACK_COLOR, YELLOW_COLOR } from "../colors";
 
 const Tab = createBottomTabNavigator();
 
@@ -16,19 +15,19 @@ const Tabs = () => {
   return (
     <Tab.Navigator
       sceneContainerStyle={{
-        backgroundColor: isDark ? BLACK_COLOR : "white",
+        backgroundColor: isDark ? "black" : "white",
       }}
       screenOptions={{
         tabBarStyle: {
-          backgroundColor: isDark ? BLACK_COLOR : "white",
+          backgroundColor: isDark ? "black" : "white",
         },
-        tabBarActiveTintColor: isDark ? YELLOW_COLOR : BLACK_COLOR,
+        tabBarActiveTintColor: isDark ? "yellow" : "black",
         tabBarInactiveTintColor: isDark ? "#d2dae2" : "#808e9b",
         headerStyle: {
-          backgroundColor: isDark ? BLACK_COLOR : "white",
+          backgroundColor: isDark ? "black" : "white",
         },
         headerTitleStyle: {
-          color: isDark ? "white" : BLACK_COLOR,
+          color: isDark ? "white" : "black",
         },
         tabBarLabelStyle: {
           marginTop: -5,

@@ -116,6 +116,7 @@ const Movies = () => {
           />
         ))}
       </Swiper>
+
       <ListContainer>
         <ListTitle>Trending Movies</ListTitle>
         <TrendingScroll
@@ -132,7 +133,7 @@ const Movies = () => {
               </Title>
               <Votes>
                 {movie.vote_average > 0
-                  ? `⭐️ ${movie.vote_average}/10`
+                  ? `⭐️ ${movie.vote_average.toFixed(1)}/10`
                   : `Coming soon`}
               </Votes>
             </Movie>
