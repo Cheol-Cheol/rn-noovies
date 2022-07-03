@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Dimensions, ActivityIndicator } from "react-native";
+import { RefreshControl, Dimensions, ActivityIndicator } from "react-native";
 import styled from "styled-components/native";
 import Swiper from "react-native-swiper";
 // components
 import Slide from "../components/Slide";
-import Poster from "../components/Poster";
-
+import VMedia from "../components/VMedia";
+import HMedia from "../components/HMedia";
 // cst
 const API_KEY = "354af52aee70782be0a6e4c9d4057d64";
 const { height: SCREEN_HEIGHT } = Dimensions.get("window");
@@ -67,6 +67,7 @@ const ComingSoonTitle = styled(ListTitle)`
 `;
 
 const Movies = () => {
+  const [refreshing, setRefreshing] = useState(false);
   const [loading, setLoading] = useState(true);
   const [nowPlaying, setNowPlaying] = useState([]);
   const [upcoming, setUpcoming] = useState([]);
@@ -108,13 +109,22 @@ const Movies = () => {
   useEffect(() => {
     getData();
   }, []);
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await getData();
+    setRefreshing(false);
+  };
 
   return loading ? (
     <Loader>
       <ActivityIndicator />
     </Loader>
   ) : (
-    <Container>
+    <Container
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
+    >
       <Swiper
         horizontal
         loop
@@ -147,18 +157,12 @@ const Movies = () => {
           showsHorizontalScrollIndicator={false}
         >
           {trending.map((movie) => (
-            <Movie key={movie.id}>
-              <Poster path={movie.poster_path} />
-              <Title>
-                {movie.original_title.slice(0, 13)}
-                {movie.original_title.length > 13 ? "..." : null}
-              </Title>
-              <Votes>
-                {movie.vote_average > 0
-                  ? `⭐️ ${movie.vote_average.toFixed(1)}/10`
-                  : `Coming soon`}
-              </Votes>
-            </Movie>
+            <VMedia
+              key={movie.id}
+              posterPath={movie.poster_path}
+              originalTitle={movie.original_title}
+              voteAverage={movie.vote_average}
+            />
           ))}
         </TrendingScroll>
       </ListContainer>
@@ -167,24 +171,13 @@ const Movies = () => {
         <ComingSoonTitle>Coming soon</ComingSoonTitle>
         {upcoming.map((movie) => {
           return (
-            <HMovie key={movie.id}>
-              <Poster path={movie.poster_path} />
-              <HColumn>
-                <Title>{movie.original_title}</Title>
-                <Release>
-                  {new Date(movie.release_date).toLocaleDateString("ko", {
-                    month: "long",
-                    day: "numeric",
-                    year: "numeric",
-                  })}
-                </Release>
-                <Overview>
-                  {movie.overview !== "" && movie.overview.length > 13
-                    ? `${movie.overview.slice(0, 140)}...`
-                    : movie.overview}
-                </Overview>
-              </HColumn>
-            </HMovie>
+            <HMedia
+              key={movie.id}
+              posterPath={movie.poster_path}
+              originalTitle={movie.original_title}
+              overview={movie.overview}
+              releaseDate={movie.release_date}
+            />
           );
         })}
       </ListContainer>
